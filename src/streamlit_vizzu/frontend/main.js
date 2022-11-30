@@ -18,7 +18,7 @@ function onChartClick(event) {
  */
 function onRender(event) {
   // Only run the render code the first time the component is loaded.
-  const {div_id, script, chart_id, output_click} = event.detail.args
+  const {div_id, script, chart_id, return_clicks} = event.detail.args
 
   let lines = script.split("\n")
   const isCreateChartLine = (line) => line.indexOf("ipyvizzu.createChart") != -1;
@@ -38,10 +38,12 @@ function onRender(event) {
 
     eval(create_chart_lines.join("\n"))
 
-    window.ipyvizzu.setEvent(
-        element, chart_id, "click_event", "click",
-        (event) => onChartClick(event)
-    );
+    if (return_clicks) {
+        window.ipyvizzu.setEvent(
+            element, chart_id, "click_event", "click",
+            (event) => onChartClick(event)
+        );
+    }
     window.rendered = true
   }
 

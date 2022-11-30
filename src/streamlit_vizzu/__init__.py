@@ -15,13 +15,16 @@ _component_func = components.declare_component(
 
 
 class VizzuChart:
-    def __init__(self, chart: Chart, key: Optional[str] = None):
+    def __init__(
+        self, chart: Chart, key: Optional[str] = None, return_clicks: bool = True
+    ):
         self.chart = chart
         self.key = key
         self.div_id = f"{self.key}_vizzu"
         self.chart_id = f"{self.key}_vizzu_chart"
         self.html = self.chart._repr_html_()
         self.animations: list[str] = []
+        self.return_clicks = return_clicks
 
     def _repr_html_(self):
         return self.chart._repr_html_()
@@ -40,6 +43,7 @@ class VizzuChart:
             div_id=self.div_id,
             chart_id=self.chart_id,
             script=script,
+            return_clicks=self.return_clicks,
             key=self.key,
         )
 
