@@ -7,6 +7,10 @@ function sendValue(value) {
   Streamlit.setComponentValue(value)
 }
 
+function onChartClick(event) {
+    sendValue(event.data)
+}
+
 /**
  * The component's render function. This will be called immediately after
  * the component is initially loaded, and then again every time the
@@ -14,7 +18,7 @@ function sendValue(value) {
  */
 function onRender(event) {
   // Only run the render code the first time the component is loaded.
-  const {div_id, script} = event.detail.args
+  const {div_id, script, chart_id, output_click} = event.detail.args
 
   let lines = script.split("\n")
   const isCreateChartLine = (line) => line.indexOf("ipyvizzu.createChart") != -1;
@@ -26,6 +30,7 @@ function onRender(event) {
   if (!window.rendered) {
     const root = document.getElementById("root")
 
+
     const element = document.createElement("div")
     element.id = div_id
 
@@ -33,12 +38,18 @@ function onRender(event) {
 
     eval(create_chart_lines.join("\n"))
 
-    // Eventually we'll want to pass some data back
-    // sendValue({output1: "foo", output2: "bar"})
+    window.ipyvizzu.setEvent(
+        element, chart_id, "click_event", "click",
+        (event) => onChartClick(event)
+    );
     window.rendered = true
   }
 
-  eval(other_lines.join("\n"))
+  // Don't rerun the animation if the script hasn't changed.
+  if (other_lines.join("") != (window.last_lines || []).join("")) {
+    eval(other_lines.join("\n"))
+    window.last_lines = other_lines
+  }
 }
 
 // Render the component whenever python send a "render event"

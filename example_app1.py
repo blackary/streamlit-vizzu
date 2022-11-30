@@ -60,4 +60,6 @@ else:
     config["coordSystem"] = "cartesian"
 
 vchart.animate(Data.filter(filter), Config(config), delay=0.1)
-vchart.show()
+output = vchart.show()
+
+st.write(output)

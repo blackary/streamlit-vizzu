@@ -18,10 +18,10 @@ class VizzuChart:
     def __init__(self, chart: Chart, key: Optional[str] = None):
         self.chart = chart
         self.key = key
-        self.html = self.chart._repr_html_()
-        self.animations: list[str] = []
         self.div_id = f"{self.key}_vizzu"
         self.chart_id = f"{self.key}_vizzu_chart"
+        self.html = self.chart._repr_html_()
+        self.animations: list[str] = []
 
     def _repr_html_(self):
         return self.chart._repr_html_()
@@ -38,6 +38,7 @@ class VizzuChart:
 
         component_value = _component_func(
             div_id=self.div_id,
+            chart_id=self.chart_id,
             script=script,
             key=self.key,
         )
