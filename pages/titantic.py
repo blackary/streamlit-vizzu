@@ -1,16 +1,3 @@
-# streamlit-vizzu
-
-Bidirectional streamlit component for interacting with vizzu animations
-
-## Installation instructions
-
-```sh
-pip install streamlit-vizzu
-```
-
-## Usage instructions
-
-```python
 import pandas as pd
 import streamlit as st
 from ipyvizzu.animation import Config, Data
@@ -58,4 +45,3 @@ value = vchart.show()
 
 # See if the user clicks on the chart
 st.write(value)
-```

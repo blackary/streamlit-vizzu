@@ -1,9 +1,10 @@
 from pathlib import Path
 from typing import Any, Optional
 
+import streamlit as st
 import streamlit.components.v1 as components
 from bs4 import BeautifulSoup
-from ipyvizzu.chart import Animate, Animation, Chart, DisplayTemplate
+from ipyvizzu.chart import Animate, Animation, Chart, DisplayTarget, DisplayTemplate
 
 # Tell streamlit that there is a component called streamlit_vizzu,
 # and that the code to display that component is in the "frontend" folder
@@ -18,7 +19,10 @@ class VizzuChart:
         self, chart: Chart, key: Optional[str] = None, return_clicks: bool = True
     ):
         self.chart = chart
-        self.key = key
+        if self.chart._display_target != DisplayTarget.MANUAL:
+            st.error("VizzuChart only works with charts with display='manual'")
+            st.stop()
+        self.key = key or "vizzu"
         self.div_id = f"{self.key}_vizzu"
         self.chart_id = f"{self.key}_vizzu_chart"
         self.html = self.chart._repr_html_()
