@@ -1,6 +1,7 @@
 import pandas as pd
 import streamlit as st
-from ipyvizzu import Chart, Config, Data, Style
+from ipyvizzu.animation import Config, Data
+from ipyvizzu.chart import Chart
 
 from streamlit_vizzu import VizzuChart
 

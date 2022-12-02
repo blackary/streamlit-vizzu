@@ -1,7 +1,6 @@
 from pathlib import Path
 from typing import Any, Optional
 
-import streamlit as st
 import streamlit.components.v1 as components
 from bs4 import BeautifulSoup
 from ipyvizzu.chart import Animate, Animation, Chart, DisplayTemplate
