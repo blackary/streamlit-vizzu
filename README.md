@@ -1,6 +1,12 @@
 # streamlit-vizzu
 
-Bidirectional streamlit component for interacting with vizzu animations
+Bidirectional streamlit component for interacting with [vizzu](https://vizzuhq.com/)
+animations. This package builds on the excellent
+(ipyvuzzu)[https://github.com/vizzuhq/ipyvizzu] library and adds some streamlit-specific
+code to allow you to interact with an ipyvizzu chart within a streamlit app without
+the chart being redrawn on every interaction.
+
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://st-pages.streamlit.app)
 
 ## Installation instructions
 
