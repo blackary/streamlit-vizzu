@@ -34,15 +34,11 @@ filter = " || ".join([f"record['Product'] == '{item}'" for item in items])
 title = f"{measure} of " + ", ".join(items)
 
 if compare_by == "Product":
-    x = ["Region", measure]
+    x = [measure]
     y = ["Product"]
-    label = measure
-    color = "Product"
 else:
     x = ["Product"]
     y = [measure, "Region"]
-    label = measure
-    color = "Region"
 
 
 config = {
@@ -50,7 +46,7 @@ config = {
     "y": y,
     "label": measure,
     "x": x,
-    "color": color,
+    "color": "Region",
 }
 
 if coords == "Polar":
@@ -58,6 +54,7 @@ if coords == "Polar":
     config["sort"] = "byValue"
 else:
     config["coordSystem"] = "cartesian"
+    config["sort"] = "none"
 
 vchart.animate(Data.filter(filter), Config(config), delay=0.1)
 output = vchart.show()
