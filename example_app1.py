@@ -27,26 +27,22 @@ items: list[str] = st.multiselect(
 col1, col2, col3 = st.columns(3)
 
 measure: str = col1.radio("Measure", ["Sales", "Revenue [$]"])  # type: ignore
-compare_by = col2.radio("Campare by", ["Region", "Product", "Both"])
+compare_by = col2.radio("Campare by", ["Region", "Product"])
 coords = col3.radio("Coordinate system", ["Cartesian", "Polar"])
 
 filter = " || ".join([f"record['Product'] == '{item}'" for item in items])
 title = f"{measure} of " + ", ".join(items)
 
 if compare_by == "Product":
-    x = ["Product"]
-    y = [measure]
-    color = None
-
-elif compare_by == "Region":
-    x = [measure]
-    y = ["Region"]
-    color = ["Region"]
-
+    x = ["Region", measure]
+    y = ["Product"]
+    label = measure
+    color = "Product"
 else:
     x = ["Product"]
     y = [measure, "Region"]
-    color = ["Region"]
+    label = measure
+    color = "Region"
 
 
 config = {
@@ -62,7 +58,6 @@ if coords == "Polar":
     config["sort"] = "byValue"
 else:
     config["coordSystem"] = "cartesian"
-    config["sort"] = "none"
 
 vchart.animate(Data.filter(filter), Config(config), delay=0.1)
 output = vchart.show()
