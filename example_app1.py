@@ -23,7 +23,7 @@ items: list[str] = st.multiselect(
 
 col1, col2, col3, col4 = st.columns(4)
 
-measure: str = col1.radio("Measure", ["Sales", "Revenue [k$]"])  # type: ignore
+measure: str = col1.radio("Measure", ["Sales", "Revenue [$]"])  # type: ignore
 compare_by = col2.radio("Campare by", ["Region", "Product", "Both"])
 coords = col3.radio("Coordinate system", ["Cartesian (desktop)", "Polar (mobile)"])
 order = col4.radio("Order items", ["Alphabetically", "By value"])
