@@ -21,11 +21,12 @@ items: list[str] = st.multiselect(
     ["Shoes", "Handbags", "Gloves", "Accessories"],
 )
 
-col1, col2, col3 = st.columns(3)
+col1, col2, col3, col4 = st.columns(4)
 
 measure: str = col1.radio("Measure", ["Sales", "Revenue [k$]"])  # type: ignore
 compare_by = col2.radio("Campare by", ["Region", "Product", "Both"])
 coords = col3.radio("Coordinate system", ["Cartesian (desktop)", "Polar (mobile)"])
+order = col4.radio("Order items", ["Alphabetically", "By value"])
 
 filter = " || ".join([f"record['Product'] == '{item}'" for item in items])
 title = f"{measure} of " + ", ".join(items)
@@ -56,10 +57,13 @@ config = {
 
 if coords == "Polar (mobile)":
     config["coordSystem"] = "polar"
-    config["sort"] = "byValue"
 else:
     config["coordSystem"] = "cartesian"
+    
+if order == "Alphabetically"
     config["sort"] = "none"
+else:
+    config["sort"] = "byValue"
 
 vchart.animate(Data.filter(filter), Config(config), delay=0.1)
 output = vchart.show()
