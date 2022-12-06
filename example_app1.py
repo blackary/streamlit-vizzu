@@ -5,10 +5,7 @@ from ipyvizzu.chart import Chart
 
 from streamlit_vizzu import VizzuChart
 
-data_frame = pd.read_csv(
-    "https://raw.githubusercontent.com/vizzuhq/ipyvizzu/main/docs/examples/stories/sales/sales.csv",
-    dtype={"tenure": str},
-)
+data_frame = pd.read_csv("https://raw.githubusercontent.com/vizzu-streamlit/streamlit-vizzu/main/sales2.csv")
 data = Data()
 data.add_data_frame(data_frame)
 
@@ -24,25 +21,30 @@ items: list[str] = st.multiselect(
     ["Shoes", "Handbags", "Gloves", "Accessories"],
 )
 
-col1, col2, col3 = st.columns(3)
+col1, col2, col3, col4 = st.columns(4)
 
 measure: str = col1.radio("Measure", ["Sales", "Revenue [$]"])  # type: ignore
-compare_by = col2.radio("Campare by", ["Region", "Product"])
-coords = col3.radio("Coordinate system", ["Cartesian", "Polar"])
+compare_by = col2.radio("Compare by", ["Region", "Product", "Both"])
+coords = col3.radio("Coordinate system", ["Cartesian (desktop)", "Polar (mobile)"])
+order = col4.radio("Order items", ["Alphabetically", "By value"])
 
 filter = " || ".join([f"record['Product'] == '{item}'" for item in items])
 title = f"{measure} of " + ", ".join(items)
 
 if compare_by == "Product":
-    x = ["Region", measure]
     y = ["Product"]
-    label = measure
-    color = "Product"
+    x = [measure]
+    color = None
+
+elif compare_by == "Region":
+    y = [measure]
+    x = ["Region"]
+    color = ["Region"]
+
 else:
-    x = ["Product"]
-    y = [measure, "Region"]
-    label = measure
-    color = "Region"
+    y = ["Product"]
+    x = [measure, "Region"]
+    color = ["Region"]
 
 
 config = {
@@ -53,11 +55,15 @@ config = {
     "color": color,
 }
 
-if coords == "Polar":
+if coords == "Polar (mobile)":
     config["coordSystem"] = "polar"
-    config["sort"] = "byValue"
 else:
     config["coordSystem"] = "cartesian"
+    
+if order == "Alphabetically":
+    config["sort"] = "none"
+else:
+    config["sort"] = "byValue"
 
 vchart.animate(Data.filter(filter), Config(config), delay=0.1)
 output = vchart.show()
