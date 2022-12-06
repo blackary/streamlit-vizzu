@@ -60,7 +60,7 @@ if coords == "Polar (mobile)":
 else:
     config["coordSystem"] = "cartesian"
     
-if order == "Alphabetically"
+if order == "Alphabetically":
     config["sort"] = "none"
 else:
     config["sort"] = "byValue"
