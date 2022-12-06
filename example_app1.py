@@ -41,12 +41,12 @@ if compare_by == "Product":
 elif compare_by == "Region":
     x = [measure]
     y = ["Region"]
-    color = Region
+    color = ["Region"]
 
 else:
     x = ["Product"]
     y = [measure, "Region"]
-    color = Region
+    color = ["Region"]
 
 
 config = {
