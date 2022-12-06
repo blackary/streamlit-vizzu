@@ -5,10 +5,7 @@ from ipyvizzu.chart import Chart
 
 from streamlit_vizzu import VizzuChart
 
-data_frame = pd.read_csv(
-    "https://raw.githubusercontent.com/vizzuhq/ipyvizzu/main/docs/examples/stories/sales/sales.csv",
-    dtype={"tenure": str},
-)
+data_frame = pd.read_csv("https://raw.githubusercontent.com/vizzu-streamlit/streamlit-vizzu/main/sales2.csv")
 data = Data()
 data.add_data_frame(data_frame)
 
@@ -57,7 +54,7 @@ config = {
     "color": color,
 }
 
-if coords == "Polar":
+if coords == "Polar (mobile)":
     config["coordSystem"] = "polar"
     config["sort"] = "byValue"
 else:
