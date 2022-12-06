@@ -1,0 +1,17 @@
+Region,Product,Sales,Revenue [k$]
+North,Shoes,4500,202.5
+North,Handbags,7400,296
+North,Gloves,2350,70.5
+North,Accessories,8200,147.6
+South,Shoes,3850,173.3
+South,Handbags,6200,248
+South,Gloves,3100,93
+South,Accessories,10500,189
+East,Shoes,2300,103.5
+East,Handbags,3800,152
+East,Gloves,7250,217.5
+East,Accessories,5600,100.8
+West,Shoes,4100,184.5
+West,Handbags,6800,272
+West,Gloves,3650,109.5
+West,Accessories,7600,136.8
