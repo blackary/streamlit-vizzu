@@ -15,12 +15,6 @@ chart.animate(data)
 
 vchart = VizzuChart(chart, key="vizzu")
 
-items: list[str] = st.multiselect(
-    "Products",
-    ["Shoes", "Handbags", "Gloves", "Accessories"],
-    ["Shoes", "Handbags", "Gloves", "Accessories"],
-)
-
 col1, col2, col3 = st.columns(3)
 
 measure: str = col1.radio("Measure", ["Sales", "Revenue [k$]"])  # type: ignore
@@ -63,5 +57,12 @@ else:
 
 vchart.animate(Data.filter(filter), Config(config), delay=0.1)
 output = vchart.show()
+
+
+items: list[str] = st.multiselect(
+    "Products",
+    ["Shoes", "Handbags", "Gloves", "Accessories"],
+    ["Shoes", "Handbags", "Gloves", "Accessories"],
+)
 
 st.write(output)
