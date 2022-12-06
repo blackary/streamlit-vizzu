@@ -28,24 +28,24 @@ col1, col2, col3 = st.columns(3)
 
 measure: str = col1.radio("Measure", ["Sales", "Revenue [$]"])  # type: ignore
 compare_by = col2.radio("Campare by", ["Region", "Product", "Both"])
-coords = col3.radio("Coordinate system", ["Cartesian", "Polar"])
+coords = col3.radio("Coordinate system", ["Cartesian (desktop)", "Polar (mobile)"])
 
 filter = " || ".join([f"record['Product'] == '{item}'" for item in items])
 title = f"{measure} of " + ", ".join(items)
 
 if compare_by == "Product":
-    x = ["Product"]
-    y = [measure]
+    y = ["Product"]
+    x = [measure]
     color = None
 
 elif compare_by == "Region":
-    x = [measure]
-    y = ["Region"]
+    y = [measure]
+    x = ["Region"]
     color = ["Region"]
 
 else:
-    x = ["Product"]
-    y = [measure, "Region"]
+    y = ["Product"]
+    x = [measure, "Region"]
     color = ["Region"]
 
 
