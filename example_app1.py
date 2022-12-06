@@ -27,18 +27,26 @@ items: list[str] = st.multiselect(
 col1, col2, col3 = st.columns(3)
 
 measure: str = col1.radio("Measure", ["Sales", "Revenue [$]"])  # type: ignore
-compare_by = col2.radio("Campare by", ["Region", "Product"])
+compare_by = col2.radio("Campare by", ["Region", "Product", "Both"])
 coords = col3.radio("Coordinate system", ["Cartesian", "Polar"])
 
 filter = " || ".join([f"record['Product'] == '{item}'" for item in items])
 title = f"{measure} of " + ", ".join(items)
 
 if compare_by == "Product":
+    x = ["Product"]
+    y = [measure]
+    color = None
+
+elif compare_by == "Region":
     x = [measure]
-    y = ["Product"]
+    y = ["Region"]
+    color = Region
+
 else:
     x = ["Product"]
     y = [measure, "Region"]
+    color = Region
 
 
 config = {
@@ -46,7 +54,7 @@ config = {
     "y": y,
     "label": measure,
     "x": x,
-    "color": "Region",
+    "color": color,
 }
 
 if coords == "Polar":
