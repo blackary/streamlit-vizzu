@@ -18,7 +18,7 @@ function onChartClick(event) {
  */
 function onRender(event) {
   // Only run the render code the first time the component is loaded.
-  const {div_id, script, chart_id, return_clicks} = event.detail.args
+  const {div_id, script, chart_id, return_clicks, height} = event.detail.args
 
   let lines = script.split("\n")
   const isCreateChartLine = (line) => line.indexOf("ipyvizzu.createChart") != -1;
@@ -43,6 +43,9 @@ function onRender(event) {
             element, chart_id, "click_event", "click",
             (event) => onChartClick(event)
         );
+    }
+    if (height) {
+        Streamlit.setFrameHeight(height)
     }
     window.rendered = true
   }

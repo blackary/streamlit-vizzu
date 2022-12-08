@@ -4,7 +4,10 @@ from typing import Any, Optional
 import streamlit as st
 import streamlit.components.v1 as components
 from bs4 import BeautifulSoup
-from ipyvizzu.chart import Animate, Animation, Chart, DisplayTarget, DisplayTemplate
+from ipyvizzu.animation import Animation
+from ipyvizzu.chart import Chart
+from ipyvizzu.method import Animate
+from ipyvizzu.template import DisplayTarget, DisplayTemplate
 
 # Tell streamlit that there is a component called streamlit_vizzu,
 # and that the code to display that component is in the "frontend" folder
@@ -16,7 +19,11 @@ _component_func = components.declare_component(
 
 class VizzuChart:
     def __init__(
-        self, chart: Chart, key: Optional[str] = None, return_clicks: bool = True
+        self,
+        chart: Chart,
+        key: Optional[str] = None,
+        return_clicks: bool = True,
+        height: Optional[int] = None,
     ):
         self.chart = chart
         if self.chart._display_target != DisplayTarget.MANUAL:
@@ -28,6 +35,7 @@ class VizzuChart:
         self.html = self.chart._repr_html_()
         self.animations: list[str] = []
         self.return_clicks = return_clicks
+        self.height = height
 
     def _repr_html_(self):
         return self.chart._repr_html_()
@@ -48,6 +56,7 @@ class VizzuChart:
             script=script,
             return_clicks=self.return_clicks,
             key=self.key,
+            height=self.height,
         )
 
         return component_value
