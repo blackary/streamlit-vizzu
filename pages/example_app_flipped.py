@@ -16,7 +16,7 @@ chart = Chart(width="100%", height="360px", display="manual")
 chart.animate(data)
 chart.feature("tooltip", True)
 
-vchart = VizzuChart(chart, key="vizzu")
+vchart = VizzuChart(chart, key="vizzu", height=380)
 
 bg_color = st.session_state.get("bg_color", "#fff")
 items = st.session_state.get("items", ["Shoes", "Handbags", "Gloves", "Accessories"])

@@ -30,7 +30,7 @@ measure: str = col1.radio("Measure", ["Sales", "Revenue [$]"])  # type: ignore
 compare_by = col2.radio("Compare by", ["Region", "Product", "Both"])
 coords = col3.radio("Coordinate system", ["Cartesian (desktop)", "Polar (mobile)"])
 order = col4.radio("Order items", ["Alphabetically", "By value"])
-bg_color = col5.color_picker("Background color", "#fff", key="bg_color")
+bg_color = col5.color_picker("Background color", "#fff")
 
 style = Style({"plot": {"backgroundColor": bg_color}})
 
@@ -71,7 +71,7 @@ if order == "Alphabetically":
 else:
     config["sort"] = "byValue"
 
-vchart.animate(Data.filter(filter), Config(config), delay=0.1)
+vchart.animate(Data.filter(filter), Config(config), style, delay=0.1)
 output = vchart.show()
 
 st.write(output)
