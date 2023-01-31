@@ -6,7 +6,7 @@ from ipyvizzu.chart import Chart
 from streamlit_vizzu import VizzuChart
 
 data_frame = pd.read_csv(
-    "https://raw.githubusercontent.com/vizzu-streamlit/streamlit-vizzu/main/sales2.csv"
+    "https://raw.githubusercontent.com/blackary/streamlit-vizzu/main/sales2.csv"
 )
 data = Data()
 data.add_data_frame(data_frame)
