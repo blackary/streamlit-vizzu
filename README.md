@@ -1,5 +1,11 @@
 # streamlit-vizzu
 
+# DEPRECATED: See https://github.com/vizzu-streamlit/streamlit-vizzu instead
+
+
+
+
+
 Bidirectional streamlit component for interacting with [vizzu](https://vizzuhq.com/)
 animations. This package builds on the excellent
 [ipyvizzu](https://github.com/vizzuhq/ipyvizzu) library and adds some streamlit-specific
